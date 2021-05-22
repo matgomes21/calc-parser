@@ -43,6 +43,11 @@ class CalcTransformer(InlineTransformer):
         self.variables.update(max=max, min=min, abs=abs)
         self.vars = {}
 
+    def number(self, token):
+        try:
+            return int(token)
+        except ValueError:
+            return float(token)
         
     def assign(self, name, value):
         self.vars[name] = value
