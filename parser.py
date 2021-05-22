@@ -41,4 +41,9 @@ class CalcTransformer(InlineTransformer):
         super().__init__()
         self.variables = {k: v for k, v in vars(math).items() if not k.startswith("_")}
         self.variables.update(max=max, min=min, abs=abs)
+        self.vars = {}
+
         
+    def assign(self, name, value):
+        self.vars[name] = value
+        return self.vars[name]
