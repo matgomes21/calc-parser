@@ -52,3 +52,14 @@ class CalcTransformer(InlineTransformer):
     def assign(self, name, value):
         self.vars[name] = value
         return self.vars[name]
+
+    def var(self, token):
+        try:
+            if token in self.variables:
+                return self.variables[token]
+            elif token[0] == "-" and token[1:] in self.variables:
+                return -self.variables[token[1:]]
+            else:
+                return self.vars[token]
+        except KeyError:
+            return "Invalid: " + str(token)
